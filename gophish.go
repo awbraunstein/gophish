@@ -133,8 +133,8 @@ func (e ErrorResponse) Error() string {
 }
 
 type ResponseHeader struct {
-	ErrorCode    *int    `json:"error_code,omitempty"`
-	ErrorMessage *string `json:"error_message,omitempty"`
+	ErrorCode    int    `json:"error_code"`
+	ErrorMessage string `json:"error_message"`
 }
 
 // ShowsQueryRequest is the request type for the shows/query endpoint.
@@ -162,7 +162,7 @@ type ShowsQueryRequest struct {
 
 type Show struct {
 	ShowId       int    `json:"showid"`
-	showDate     string `json:"showdate"`
+	ShowDate     string `json:"showdate"`
 	ArtistId     int    `json:"artistid"`
 	BilledAs     string `json:"billed_as"`
 	Link         string `json:"link"`
