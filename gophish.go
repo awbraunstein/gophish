@@ -19,6 +19,17 @@ const (
 	defaultQueryRate = time.Minute / 120
 )
 
+// ParseDate parses the date string into a time.Time for use in the Phish.Net
+// API.
+func ParseDate(date string) (time.Time, error) {
+	return time.Parse(dateFormat, date)
+}
+
+// FormatDate converts a time.Time into the correct format that the Phish.Net API expects.
+func FormatDate(date time.Time) string {
+	return date.Format(dateFormat)
+}
+
 // Client is a http.Client wrapper that handles rate limiting as well as
 // provides convenience methods for various Phish.Net API endpoints.
 type Client struct {
@@ -69,17 +80,6 @@ func NewClient(apiKey string, opts ...ClientOpt) *Client {
 
 	c.throttle = time.Tick(c.queryRate)
 	return c
-}
-
-// ParseDate parses the date string into a time.Time for use in the Phish.Net
-// API.
-func ParseDate(date string) (time.Time, error) {
-	return time.Parse(dateFormat, date)
-}
-
-// FormatDate converts a time.Time into the correct format that the Phish.Net API expects.
-func FormatDate(date time.Time) string {
-	return date.Format(dateFormat)
 }
 
 func (c *Client) do(method, apiPath string, req, resp interface{}) error {

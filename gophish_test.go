@@ -5,7 +5,53 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 )
+
+func TestParseDate(t *testing.T) {
+	tests := []struct {
+		date string
+		want time.Time
+	}{
+		{
+			date: "1980-10-03",
+			want: time.Date(1980, time.October, 3, 0, 0, 0, 0, time.UTC),
+		}, {
+			date: "2000-01-01",
+			want: time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC),
+		},
+	}
+	for _, tc := range tests {
+		got, err := ParseDate(tc.date)
+		if err != nil {
+			t.Errorf("Got unexpected err; %v", err)
+		} else if !got.Equal(tc.want) {
+			t.Errorf("Got: %s\nWant: %s", got, tc.want)
+		}
+	}
+}
+
+func TestFormatDate(t *testing.T) {
+	tests := []struct {
+		want string
+		date time.Time
+	}{
+		{
+			want: "1980-10-03",
+			date: time.Date(1980, time.October, 3, 0, 0, 0, 0, time.UTC),
+		}, {
+			want: "2000-01-01",
+			date: time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC),
+		},
+	}
+	for _, tc := range tests {
+		got := FormatDate(tc.date)
+		if got != tc.want {
+			t.Errorf("Got: %s\nWant: %s", got, tc.want)
+		}
+	}
+
+}
 
 func TestShowsQuery(t *testing.T) {
 	testServer := httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
