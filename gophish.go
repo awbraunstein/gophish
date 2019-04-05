@@ -1,3 +1,4 @@
+// Package gophish provides a convenient wrapper around the Phish.Net API.
 package gophish
 
 import (
