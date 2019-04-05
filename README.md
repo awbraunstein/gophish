@@ -5,4 +5,14 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/awbraunstein/gophish.svg)](https://codecov.io/gh/awbraunstein/gophish)
 [![Go Report Card](https://goreportcard.com/badge/github.com/awbraunstein/gophish)](https://goreportcard.com/report/github.com/awbraunstein/gophish)
 
-This is a Golang client for the Phish.net API.
+This is a Golang client for the [Phish.net API](https://phishnet.api-docs.io/v3/the-phish-net-api/welcome).
+
+
+# Supported API Endpoints
+
+* /shows/query
+* /setlists/latest
+* /setlists/get
+* /setlists/recent
+* /setlists/tiph
+* /setlist/random
